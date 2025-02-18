@@ -1,0 +1,159 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block title %} جستجـو{% endblock %}
+
+{% block content %}
+            <!--Page Header Start-->
+    <section class="page-header rtl">
+        <div class="page-header-bg" style="background-image: url({% static 'images/backgrounds/page-header-bg.jpg' %})">
+        </div>
+        <div class="page-header__ripped-paper"
+            style="background-image: url({% static 'images/shapes/page-header-ripped-paper.png' %});"></div>
+        <div class="container">
+            <div class="page-header__inner">
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li><a href="{% url 'store:index' %}">خانه</a></li>
+                    <li><span>/</span></li>
+                    <li>فروشگاه</li>
+                </ul>
+                <h2> لیست محصولات بر اسـاس جستجوی {{ query }} {{ category.name }}</h2>
+            </div>
+        </div>
+    </section>
+    <!--Page Header End-->
+
+    <!--Product List Start-->
+    <section class="product-list rtl">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3">
+                    <div class="product__sidebar">
+                        <div class="shop-search product__sidebar-single">
+                            <form action="{% url 'store:search' %}" method="get">
+                                <input type="text" placeholder="جستجو" name="query">
+                            </form>
+                        </div>
+                        <div class="product__price-ranger product__sidebar-single">
+                        </div>
+                        <div class="shop-category product__sidebar-single">
+                            <h3 class="product__sidebar-title">دسته بندی ها</h3>
+                            <ul class="list-unstyled">
+                                {% for category in categories %}
+                                <li class="active"><a href="{% url 'store:product_by_category' category.id category.slug %}">{{ category.name }}<span>({{ category.product_count }})</span></a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="shop-best-sellers product__sidebar-single">
+                            <h3 class="product__sidebar-title">پرفروش ترین ها</h3>
+                            <ul class="list-unstyled shop-best-sellers__list">
+                                {% for pro in top_sell %}
+                                <li>
+                                    <div class="shop-best-sellers__img">
+                                        <img src="{{ pro.images.first.file.url }}" alt="">
+                                    </div>
+                                    <div class="shop-best-sellers__content">
+                                        <h4 class="shop-best-sellers__title"><a
+                                                href="{{ pro.get_absolute_url }}">{{ pro.name }}</a></h4>
+                                        <p class="shop-best-sellers__rate">{{ pro.new_price }} تومان</p>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-9">
+                    <div class="product-list__right">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="product__showing-result">
+                                    <div class="product__showing-text-box">
+                                        <p class="product__showing-text">{{ products.count }}</p>
+                                    </div>
+                                    <div class="product__menu-showing-sort">
+                                        <div class="product__showing-sort ltr">
+                                            <div class="select-box">
+                                                <select class="wide">
+                                                    <option data-display="مرتب سازی بر اساس محبوب">مرتب سازی بر اساس محبوبیت</option>
+                                                    <option value="1">مرتب سازی بر اساس محبوبیت</option>
+                                                    <option value="2">مرتب سازی بر اساس قیمت</option>
+                                                    <option value="3">مرتب سازی بر اساس رتبه بندی</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-list__inner">
+                            <!--Products List Single Start-->
+                            {% for item in products %}
+                            <div class="product-list__single">
+                                <div class="product-list__single-inner">
+                                    <div class="product-list__img-box">
+                                        <div class="product-list__img">
+                                            <img src="{{ item.images.first.file.url }}" alt="">
+                                        </div>
+                                        <div class="product-list__icon-boxes">
+                                            <a href="#"><i class="far fa-heart"></i></a>
+                                            <a href="{{ item.get_absolute_url }}"><i class="fas fa-eye"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-list__content">
+
+                                        <h4 class="product-list__title"><a href="{{ item.get_absolute_url }}">{{ item.name }}</a>
+                                        </h4>
+                                        <p class="product-list__price">{{ item.new_price }} تومان</p>
+                                        <p class="product-list__text">{{ item.description }}</p>
+                                        <div class="product-list__btn-box">
+                                            <a href="cart.html" class="thm-btn product-list__btn">به سبد خرید اضافه کنید</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                {% empty %}
+                                <h3>نتیجه ای برای جستجوی شما پیدا نشد</h3>
+                            {% endfor %}
+                            <!--Products List Single End-->
+                            <!--Products List Single End-->
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="shop-page__pagination">
+                                    <ul class="pg-pagination list-unstyled">
+                                        {% if page_obj.has_previous %}
+                                            <li class="prev">
+                                                <a href="?query={{ query }}&page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                                    <i class="fa fa-angle-left"></i>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+
+                                        {% for num in page_obj.paginator.page_range %}
+                                            {% if page_obj.number == num %}
+                                                <li class="count active"><a href="?query={{ query }}&page={{ num }}">{{ num }}</a></li>
+                                            {% else %}
+                                                <li class="count"><a href="?query={{ query }}&page={{ num }}">{{ num }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        {% if page_obj.has_next %}
+                                            <li class="next">
+                                                <a href="?query={{ query }}&page={{ page_obj.next_page_number }}" aria-label="Next">
+                                                    <i class="fa fa-angle-right"></i>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% include 'partials/subscribe.html' %}
+    <!--Product List End-->
+{% endblock %}

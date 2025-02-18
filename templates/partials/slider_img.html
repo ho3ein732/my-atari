@@ -1,0 +1,78 @@
+{% load static %}
+<!--Main Slider Start-->
+<section class="main-slider clearfix rtl">
+    <div class="swiper-container thm-swiper__slider" data-swiper-options='{"slidesPerView": 1, "loop": true,
+        "effect": "fade",
+        "pagination": {
+        "el": "#main-slider-pagination",
+        "type": "bullets",
+        "clickable": true
+        },
+        "navigation": {
+        "nextEl": "#main-slider__swiper-button-next",
+        "prevEl": "#main-slider__swiper-button-prev"
+        },
+        "autoplay": {
+        "delay": 5000
+        }}'>
+        <div class="swiper-wrapper">
+            {% for ban in top_banners %}
+            <div class="swiper-slide">
+                <div class="main-slider-bg-shape"
+                    style="background-image: url({% static 'shapes/main-slider-bg-shape.png' %});"></div>
+                <div class="main-slider-bg-shape-two"
+                    style="background-image: url({% static 'images/shapes/main-slider-bg-shape-two.png' %});"></div>
+                <div class="main-slider__shape-1 float-bob-y">
+                    <img src="{% static 'images/shapes/main-slider-shape-1.png' %}" alt="">
+                </div>
+                <div class="main-slider__shape-2 float-bob-x">
+                    <img src="{% static 'images/shapes/main-slider-shape-2.png' %}" alt="">
+                </div>
+                <div class="main-slider__shape-3 float-bob-x">
+                    <img src="{% static 'images/shapes/main-slider-shape-3.png' %}" alt="">
+                </div>
+                <div class="main-slider__shape-4 float-bob-y">
+                    <img src="{% static 'images/shapes/main-slider-shape-4.png' %}" alt="">
+                </div>
+                <div class="main-slider__shape-5 zoominout">
+                    <img src="{% static 'images/shapes/main-slider-shape-5.png' %}" alt="">
+                </div>
+                <div class="main-slider__shape-6 float-bob-x">
+                    <img src="{% static 'images/shapes/main-slider-shape-6.png' %}" alt="">
+                </div>
+                <div class="main-slider__shape-7 float-bob-y">
+                    <img src="{% static 'images/shapes/main-slider-shape-7.png' %}" alt="">
+                </div>
+                <div class="main-slider__shape-8 float-bob-x">
+                    <img src="{% static 'images/shapes/main-slider-shape-8.png' %}" alt="">
+                </div>
+                <div class="main-slider__img-one">
+                    <img src="{% static 'images/resources/main-slider-img-1.png' %}" alt="" class="img-bounce">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="main-slider__content">
+                                <div class="main-slider__shape-9 float-bob-y">
+                                    <img src="{% static '' %}images/shapes/main-slider-shape-9.png" alt="">
+                                </div>
+                                <h4 class="main-slider__sub-title">{{ ban.title }}</h4>
+                                <h2 class="main-slider__title">{{ ban.short_description }}</h2>
+                                <div class="main-slider__btn-box">
+                                    <a href="{% url 'store:product_by_category' 1 None %}" class="thm-btn main-slider__btn-two">خرید کنید</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <!-- If we need navigation buttons -->
+
+
+    </div>
+</section>
+<!--Main Slider End-->

@@ -1,0 +1,49 @@
+<!--News One Start-->
+<section class="news-one rtl">
+    <div class="container">
+        <div class="section-title text-center">
+            <span class="section-title__tagline">از پست های وبلاگ</span>
+            <h2 class="section-title__title">آخرین به روز رسانی اخبار
+                <br>مقالات</h2>
+        </div>
+        <div class="row">
+            <!--News One Single Start-->
+            {% for blog in blogs %}
+                <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="100ms">
+                    <div class="news-one__single">
+                        <div class="news-one__img-box">
+                            <div class="news-one__img">
+                                <img src="{{ blog.gallery.first.image.url }}" alt="">
+                            </div>
+                        </div>
+                        <div class="news-one__content-box">
+                            <ul class="news-one__meta list-unstyled">
+                                <li>
+                                    <a href="{% url 'blog:blog_detail' blog.id %}"><i class="fa fa-tag"></i>آپارتمان</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'blog:blog_detail' blog.id %}"><i class="fas fa-user-circle"></i>توسط ادمین</a>
+                                </li>
+                            </ul>
+                            <h3 class="news-one__title"><a href="{% url 'blog:blog_detail' blog.id %}">{{ blog.title }}</a></h3>
+                            <div class="news-one__bottom">
+                                <div class="news-one__read-more">
+                                    <a href="{% url 'blog:blog_detail' blog.id %}">ادامه مطلب</a>
+                                </div>
+                                <div class="news-one__comment">
+                                    <a href="{% url 'blog:blog_detail' blog.id %}"><i class="fas fa-comments"></i>{{ blog.comments.count }}</a>
+                                </div>
+                            </div>
+                            <div class="news-one__date">
+                                <p>{{ blog.created_at|date:"y-d-m" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!--Blog One End-->
+
+

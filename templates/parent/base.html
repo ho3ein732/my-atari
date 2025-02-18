@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>عـطـاری صـالحی | {% block title %}{% endblock %}</title>
+    <!-- favicons Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicons/apple-touch-icon.png' %}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicons/favicon-32x32.png' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicons/favicon-16x16.png' %}" />
+    <link rel="manifest" href="{% static 'images/favicons/site.webmanifest' %}" />
+    <meta name="description" content="ogenix HTML 5 Template " />
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/animate/animate.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/animate/custom-animate.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/fontawesome/css/all.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/jarallax/jarallax.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/jquery-magnific-popup/jquery.magnific-popup.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/nouislider/nouislider.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/nouislider/nouislider.pips.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/odometer/odometer.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/swiper/swiper.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/ogenix-icons/style.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/tiny-slider/tiny-slider.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/reey-font/stylesheet.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.theme.default.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/bxslider/jquery.bxslider.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/bootstrap-select/css/bootstrap-select.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/vegas/vegas.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/jquery-ui/jquery-ui.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/timepicker/timePicker.css' %}" />
+    <link rel="stylesheet" href="{% static 'vendors/nice-select/nice-select.css' %}" />
+
+    <!-- template styles -->
+    <link rel="stylesheet" href="{% static 'css/ogenix.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/ogenix-responsive.css' %}" />
+    {% block head %}{% endblock %}
+</head>
+
+<body class="custom-cursor">
+    {% include 'partials/header.html' %}
+    {% block content %}{% endblock %}
+    {% include 'partials/footer.html' %}
+
+    <script src="{% static 'vendors/jquery/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendors/jarallax/jarallax.min.js' %}"></script>
+    <script src="{% static 'vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'vendors/jquery-appear/jquery.appear.min.js' %}"></script>
+    <script src="{% static 'vendors/jquery-circle-progress/jquery.circle-progress.min.js' %}"></script>
+    <script src="{% static 'vendors/jquery-magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'vendors/jquery-validate/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'vendors/nouislider/nouislider.min.js' %}"></script>
+    <script src="{% static 'vendors/odometer/odometer.min.js' %}"></script>
+    <script src="{% static 'vendors/swiper/swiper.min.js' %}"></script>
+    <script src="{% static 'vendors/tiny-slider/tiny-slider.min.js' %}"></script>
+    <script src="{% static 'vendors/wnumb/wNumb.min.js' %}"></script>
+    <script src="{% static 'vendors/wow/wow.js' %}"></script>
+    <script src="{% static 'vendors/isotope/isotope.js' %}"></script>
+    <script src="{% static 'vendors/countdown/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'vendors/bxslider/jquery.bxslider.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+    <script src="{% static 'vendors/vegas/vegas.min.js' %}"></script>
+    <script src="{% static 'vendors/jquery-ui/jquery-ui.js' %}"></script>
+    <script src="{% static 'vendors/timepicker/timePicker.js' %}"></script>
+    <script src="{% static 'vendors/circleType/jquery.circleType.js' %}"></script>
+    <script src="{% static 'vendors/circleType/jquery.lettering.min.js' %}"></script>
+    <script src="{% static 'vendors/nice-select/jquery.nice-select.min.js' %}"></script>
+    <!-- template js -->
+    <script src="{% static 'js/ogenix.js' %}"></script>
+    <!--my Ajax-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.btn-cart').click(function (e) {
+                    e.preventDefault();
+                    var button = $(this);
+                    var productId = button.data('product-id');
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "cart:add-to-cart" 0 %}'.replace('0', productId),
+                        data: {
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        success: function (data) {
+
+                            $('.reload').load(location.href + " .reload");
+                            $('.my-item-count').text(data.item_count);
+
+                        },
+                        error: function (xhr) {
+                            var response = JSON.parse(xhr.responseText);
+                            console.log(response.error || "خطایی رخ داده است.");
+                        }
+                    });
+                });
+
+                $(document).on('click', '.remove_item', function (e) {
+                    e.preventDefault();
+                    var button = $(this);
+                    var productId = button.data('product-id');
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "cart:remove-item" %}',
+                        data: {
+                            'csrfmiddlewaretoken': '{{ csrf_token }}',
+                            'item_id': productId
+                        },
+                        success: function (data) {
+                            if (data.success) {
+                                button.closest('.product').remove();
+                                $('.price-total-1').text(data.total_price);
+                                $('.my-price').text(data.total_price);
+                                $('.my-item-count').text(data.item_count);
+
+
+
+                                if (data.item_count === 0) {
+                                    $('.reload').html('<p>سبد خرید شما خالی است</p>');
+                                }
+                            } else {
+                                console.log(data.error || "خطایی رخ داده است.");
+                            }
+                        },
+                        error: function (xhr) {
+                            console.log("خطایی رخ داده است." + xhr);
+                        }
+                    });
+                });
+                $('.btn-wishlist').click(function (event) {
+                    event.preventDefault();
+                    var button = $(this);
+                    var product_id = button.data('product-id');
+
+
+                    $.ajax({
+                        url: '{% url "store:add_to-favorite" 0 %}'.replace('0', product_id),
+                        method: 'POST',
+                        data: {
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        success: function (data) {
+                            $('.my-wishlist-heart').text(data.favorite_count);
+
+                            if (data.saved) {
+                                $('#wishlist-message-dell').hide();
+                                $('#wishlist-message').fadeIn().delay(3000).fadeOut();
+                            } else {
+                                $('#wishlist-message').hide();
+                                $('#wishlist-message-dell').fadeIn().delay(3000).fadeOut();
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                });
+
+
+                $('#remove-will').click(function() {
+                    var button = $(this)
+                    var ProductId = button.data('product-id')
+
+                    $.ajax({
+                        method: 'POST',
+                        url: '{% url 'store:remove_favorite' 0 %}'.replace('0', ProductId),
+                        data: {
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        success: function (response) {
+                            if(response.success) {
+                                button.closest('tr').remove();
+                            }else {console.log('مشکلی در حذف')}
+                            },
+                        error: function (error) {
+                            console.log(error)
+                        },
+                    });
+                });
+            });
+        </script>
+    <!--End my Ajax-->
+</body>
+</html>

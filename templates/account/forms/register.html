@@ -1,0 +1,56 @@
+<!-- register.html -->
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- register.html -->
+    <section class="account rtl">
+        <div class="container">
+            <div class="account__main-tab-box tabs-box">
+                <ul class="tab-buttons clearfix list-unstyled">
+                    <li data-tab="#register" class="tab-btn active-btn"><span>ثبت نام</span></li>
+                </ul>
+                <div class="tabs-content">
+                    <!--tab-->
+                    <div class="tab active-tab" id="register">
+                        <div class="account__main-tab-inner">
+                            <form method="post" class="account__form">
+                            {% csrf_token %}
+                                <div class="account__form-input-box">
+                                    {{ form.email }}
+                                </div>
+                                <div class="account__form-input-box">
+                                    {{ form.password }}
+                                </div>
+                                <div class="account__form-btn-box">
+                                    <button type="submit" class="thm-btn account__form-btn">ثبت نام کنید</button>
+                                </div>
+                                <div class="account__form-forgot-password">
+                                    <a href="{% url 'account:login' %}">حساب کاربری دارید؟وارد شوید</a>
+                                </div>
+                                {% if messages %}
+                                        <ul class="messages">
+                                            {% for message in messages %}
+                                                <li class="{{ message.tags }}">{{ message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                {% endif %}
+                                {% if form.errors %}
+                                    <ul class="error-messages">
+                                        {% for field, errors in form.errors.items %}
+                                            {% for error in errors %}
+                                                <li class="error">{{ error }}</li>
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                    <!--tab-->
+                </div>
+            </div>
+        </div>
+    </section>
+        {% include 'partials/subscribe.html' %}
+
+{% endblock %}

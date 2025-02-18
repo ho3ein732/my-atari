@@ -1,0 +1,77 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block title %}درباره ما{% endblock %}
+
+{% block content %}
+        <!--Page Header Start-->
+    <section class="page-header rtl">
+        <div class="page-header-bg" style="background-image: url({% static 'images/backgrounds/page-header-bg.jpg' %})">
+        </div>
+        <div class="page-header__ripped-paper"
+            style="background-image: url({% static 'images/shapes/page-header-ripped-paper.png' %});"></div>
+        <div class="container">
+            <div class="page-header__inner">
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li><a href="{% url 'store:index' %}">خانه</a></li>
+                    <li><span>/</span></li>
+                    <li>تماس بگیرید</li>
+                </ul>
+                <h2>تماس بگیرید</h2>
+            </div>
+        </div>
+    </section>
+    <!--Page Header End-->
+
+
+
+    <!--Contact Details Start-->
+    <section class="contact-details rtl">
+        <div class="container">
+            <div class="contact-details__inner">
+                <ul class="contact-details__contact-list list-unstyled">
+                    <li>
+                        <div class="icon">
+                            <span class="icon-help"></span>
+                        </div>
+                        <div class="content">
+                            <p>سوالی دارید؟</p>
+                            <h4>
+                                <a href="tel:923076806860">09122234987</a>
+                            </h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <span class="icon-mailbox"></span>
+                        </div>
+                        <div class="content">
+                            <p>ایمیل بنویسید</p>
+                            <h4>
+                                <a href="mailto:needhelp@company.com">needhelp@company.com</a>
+                            </h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <span class="icon-maps-and-flags"></span>
+                        </div>
+                        <div class="content">
+                            <p>از فروشگاه دیدن کنید</p>
+                            <h4>ملایر 32 متری اعطاری صالحی </h4>
+                        </div>
+                    </li>
+                </ul>
+                <div class="contact-details__social-box">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+    <!--Contact Details End-->
+    {% include 'partials/subscribe.html' %}
+    <!--Contact Page End-->
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block title %}جزئیات مطلــب{% endblock %}
+
+{% block content %}
+        <!--Page Header Start-->
+    <section class="page-header rtl">
+        <div class="page-header-bg" style="background-image: url({% static 'images/backgrounds/page-header-bg.jpg' %})">
+        </div>
+        <div class="page-header__ripped-paper"
+            style="background-image: url({% static 'images/shapes/page-header-ripped-paper.png' %});"></div>
+        <div class="container">
+            <div class="page-header__inner">
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li><a href="{% url 'blog:blog_detail'  post.id  %}">خانه</a></li>
+                    <li><span>/</span></li>
+                    <li>خبر</li>
+                </ul>
+                <h2>جزئیات خبر</h2>
+            </div>
+        </div>
+    </section>
+    <!--Page Header End-->
+
+    <!--News Details Start-->
+    <section class="news-details rtl">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 col-lg-7">
+                    <div class="news-details__left">
+                        <div class="news-details__img">
+                            <img src="{{ post.gallery.first.image.url }}" alt="">
+                            <div class="news-details__date">
+                                <p>{{ post.created_at|date:"y-d-m" }}</p>
+                            </div>
+                        </div>
+                        <div class="news-details__content">
+                            <ul class="list-unstyled news-details__meta">
+                                <li><a href="{% url 'blog:blog_detail' post.id %}"><i class="fas fa-tag"></i>آپارتمان</a>
+                                </li>
+                                <li><a href="{% url 'blog:blog_detail' post.id %}"><i class="fas fa-user-circle"></i>توسط ادمین</a>
+                                </li>
+                            </ul>
+                            <h3 class="news-details__title">{{ post.title }}</h3>
+                            <p class="news-details__text-1">{{ post.content }}</p>
+                        </div>
+                        <div class="news-details__bottom">
+                            <div class="news-details__social-list">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-facebook"></i></a>
+                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="comment-one">
+                            <h3 class="comment-one__title">{{ post.content.count }} نظر</h3>
+                            {% for comment in post.comments.all %}
+                            <div class="comment-one__single">
+                                <div class="comment-one__image">
+                                    <img src="{% static 'images/blog/comment-1-2.jpg' %}" alt="">
+                                </div>
+                                <div class="comment-one__content">
+                                    <h3>کاربر سایت</h3>
+                                    <p>{{ comment.content }}</p>
+                                </div>
+                            </div>
+                                {% empty %}
+                                <p>کامنتی وجود ندارد</p>
+                            {% endfor %}
+                        </div>
+                        <div class="comment-form">
+                            <h3 class="comment-form__title">نظر بدهید</h3>
+                            <form action="{% url 'blog:add_comment' post.id %}" class="comment-one__form contact-form-validated"
+                                novalidate="novalidate">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div class="comment-form__input-box">
+                                            <input type="text" placeholder="نام شما" name="first_name">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="comment-form__input-box">
+                                            <input type="email" placeholder="آدرس ایمیل" name="email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="comment-form__input-box text-message-box">
+                                            <textarea name="content" placeholder="یک نظر بنویسید"></textarea>
+                                        </div>
+                                        <div class="comment-form__btn-box">
+                                            <button type="submit" class="thm-btn comment-form__btn">ارسال نظر</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="result"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-5">
+                    <div class="sidebar">
+                        <div class="sidebar__single sidebar__post">
+                            <h3 class="sidebar__title">آخرین پست ها</h3>
+                            <ul class="sidebar__post-list list-unstyled">
+                                {% for blog in blogs %}
+                                <li>
+                                    <div class="sidebar__post-image">
+                                        <img src="{% url 'blog:blog_detail' blog.id %}" alt="">
+                                    </div>
+                                    <div class="sidebar__post-content">
+                                        <h3>
+                                            <span class="sidebar__post-content-meta"><i
+                                                    class="fas fa-comments"></i>{{ blog.created_at|date:"y-m-d" }}</span>
+                                            <a href="{% url 'blog:blog_detail' blog.id %}">{{ blog.title }}</a>
+                                        </h3>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="sidebar__single sidebar__category">
+                            <h3 class="sidebar__title">دسته بندی ها</h3>
+                            <ul class="sidebar__category-list list-unstyled">
+                                {% for cate in categories %}
+                                <li class="active"><a href="{% url 'store:product_by_category' cate.id cate.slug %}">{{ cate.name }}<span
+                                            class="icon-right-arrow"></span></a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% include 'partials/subscribe.html' %}
+    <!--News Details End-->
+{% endblock %}

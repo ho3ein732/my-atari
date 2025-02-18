@@ -1,0 +1,145 @@
+{% load static %}
+<footer class="site-footer rtl">
+            <div class="site-footer__bg"
+                style="background-image: url({% static 'images/backgrounds/site-footer-bg-img.png' %});"></div>
+            <div class="site-footer__ripped-paper"
+                style="background-image: url({% static 'images/shapes/site-footer-ripped-paper.png' %});"></div>
+            <div class="container">
+                <div class="site-footer__top">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
+                            <div class="footer-widget__column footer-widget__about">
+                                <div class="footer-widget__logo">
+                                    <a href="{% url 'store:index' %}"><img src="{% static 'images/resources/footer-logo.png' %}" alt=""></a>
+                                </div>
+                                <div class="footer-widget__about-text-box">
+                                    <p class="footer-widget__about-text">کیفیت محصولات روزانه تازه و ارگانیک سالم</p>
+                                </div>
+                                <div class="footer-widget__social-box">
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-facebook"></i></a>
+                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
+                            <div class="footer-widget__column footer-widget__explore">
+                                <div class="footer-widget__title-box">
+                                    <h3 class="footer-widget__title">جستجو کنید</h3>
+                                </div>
+                                <div class="footer-widget__explore-list-box">
+                                    <ul class="footer-widget__explore-list list-unstyled">
+                                        <li><a href="{% url 'store:about_us' %}">درباره شرکت</a></li>
+                                        <li><a href="{% url 'store:product_by_category' 1 None %}">محصولات جدید</a></li>
+                                        <li><a href="{% url 'store:contact_us' %}">تماس بگیرید</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
+                            <div class="footer-widget__column footer-widget__contact">
+                                <div class="footer-widget__title-box">
+                                    <h3 class="footer-widget__title">تماس بگیرید</h3>
+                                </div>
+                                <p class="footer-widget__contact-text">همدان-32 متری-اعطاری صالحی</p>
+                                <ul class="list-unstyled footer-widget__contact-list">
+                                    <li>
+                                        <div class="text ltr">
+                                            <p><a href="tel:928800688960">+98 1222 349 8756</a></p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="text">
+                                            <p><a href="mailto:info@example.com ">info@example.com</a></p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="site-footer__bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="site-footer__bottom-inner">
+                                <div class="site-footer__bottom-left">
+                                    <p class="site-footer__bottom-text">© کپی رایت 2023 توسط <a href="#">ojenix.com</a></p>
+                                </div>
+                                <div class="site-footer__bottom-right">
+                                    <ul class="list-unstyled site-footer__bottom-menu">
+                                        <li><a href="about.html">شرایط و ضوابط</a></li>
+                                        <li><span>/</span></li>
+                                        <li><a href="about.html">سیاست حفظ حریم خصوصی</a></li>
+                                        <li><span>/</span></li>
+                                        <li><a href="about.html">سیاست حفظ حریم خصوصی</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+
+            <div class="mobile-nav__wrapper">
+        <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+        <!-- /.mobile-nav__overlay -->
+        <div class="mobile-nav__content rtl">
+            <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+
+            <div class="logo-box">
+                <a href="index-2.html" aria-label="logo image"><img src="assets/images/resources/logo-1.png" width="104"
+                        alt="" /></a>
+            </div>
+            <!-- /.logo-box -->
+            <div class="mobile-nav__container"></div>
+            <!-- /.mobile-nav__container -->
+
+            <ul class="mobile-nav__contact list-unstyled">
+                <li>
+                    <i class="fa fa-envelope"></i>
+                    <a href="mailto:needhelp@packageName__.com">needhelp@ogenix.com</a>
+                </li>
+                <li>
+                    <i class="fa fa-phone-alt"></i>
+                    <a href="tel:666-888-0000">09122235987</a>
+                </li>
+            </ul><!-- /.mobile-nav__contact -->
+            <div class="mobile-nav__top">
+                <div class="mobile-nav__social">
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-facebook-square"></a>
+                    <a href="#" class="fab fa-pinterest-p"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                </div><!-- /.mobile-nav__social -->
+            </div><!-- /.mobile-nav__top -->
+
+        </div>
+        <!-- /.mobile-nav__content -->
+    </div>
+    <!-- /.mobile-nav__wrapper -->
+
+    <div class="search-popup">
+        <div class="search-popup__overlay search-toggler"></div>
+        <!-- /.search-popup__overlay -->
+        <div class="search-popup__content">
+            <form action="#">
+                <label for="search" class="sr-only">جستجو کنید</label><!-- /.sr-only -->
+                <input type="text" id="search" placeholder="جستجو کنید" />
+                <button type="submit" aria-label="search submit" class="thm-btn">
+                    <i class="icon-magnifying-glass"></i>
+                </button>
+            </form>
+        </div>
+        <!-- /.search-popup__content -->
+    </div>
+    <!-- /.search-popup -->
+
+    <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="icon-up-arrow"></i></a>

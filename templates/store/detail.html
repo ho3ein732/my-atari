@@ -1,0 +1,82 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block title %}جزئیات محصول{% endblock %}
+
+{% block content %}
+        <!--Page Header Start-->
+    <section class="page-header rtl">
+        <div class="page-header-bg" style="background-image: url({% static 'images/backgrounds/page-header-bg.jpg' %})">
+        </div>
+        <div class="page-header__ripped-paper"
+            style="background-image: url({% static 'images/shapes/page-header-ripped-paper.png' %});"></div>
+        <div class="container">
+            <div class="page-header__inner">
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li><a href="{% url 'store:index' %}">خانه</a></li>
+                    <li><span>/</span></li>
+                    <li>فروشگاه</li>
+                </ul>
+                <h2>جزئیات محصول</h2>
+            </div>
+        </div>
+    </section>
+    <!--Page Header End-->
+
+    <!--Product Details Start-->
+    <section class="product-details rtl">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-xl-6">
+                    <div class="product-details__img">
+                        <img src="{{ product.images.first.file.url }}" alt="" />
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xl-6">
+                    <div class="product-details__top">
+                        <h3 class="product-details__title">{{ product.name }}<span>{{ product.new_price }} تومان</span> </h3>
+                    </div>
+                    <div class="product-details__reveiw">
+
+                        <span>{{ reviews.count }} نظرات مشتریان</span>
+                    </div>
+                    <div class="product-details__content">
+                        <p class="product-details__content-text1">{{ product.description }}</p>
+                        <p class="product-details__content-text2">شناسه. {{ product.id }} <br>
+                            {% if product.inventory < 1 %}
+                            	ناموجود{% else %}موجود
+                            {% endif %}  در فروشگاه</p></p>
+                    </div>
+
+
+
+                    <div class="product-details__buttons">
+                        <div class="product-details__buttons-1">
+                            <a href="wishlist.html" class="thm-btn">به لیست علاقه مندی ها اضافه کنید</a>
+                        </div>
+
+                        <div class="product-details__buttons-2">
+                            {% if product.inventory < 1 %}
+                                <p style="color: #6a1a21">ناموجود</p>
+                            {% else %}
+                            <a href="cart.html" class="thm-btn">به سبد خرید اضافه کنید</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="product-details__social">
+                        <div class="title">
+                            <h3>با دوستان به اشتراک بگذارید</h3>
+                        </div>
+                        <div class="product-details__social-link">
+                            <a href="#"><span class="fab fa-twitter"></span></a>
+                            <a href="#"><span class="fab fa-facebook"></span></a>
+                            <a href="#"><span class="fab fa-pinterest-p"></span></a>
+                            <a href="#"><span class="fab fa-instagram"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% include 'partials/subscribe.html' %}
+    <!--Product Details End-->
+{% endblock %}

@@ -1,0 +1,166 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block title %}تکمیل خرید{% endblock %}
+
+{% block content %}
+
+            <!--Page Header Start-->
+        <section class="page-header rtl">
+            <div class="page-header-bg" style="background-image: url({% static 'images/backgrounds/page-header-bg.jpg' %})">
+            </div>
+            <div class="page-header__ripped-paper"
+                style="background-image: url({% static 'images/shapes/page-header-ripped-paper.png' %});"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <ul class="thm-breadcrumb list-unstyled">
+                        <li><a href="{% url 'store:index' %}">خانه</a></li>
+                        <li><span>/</span></li>
+                        <li>فروشگاه</li>
+                    </ul>
+                    <h2>تسویه حساب</h2>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End-->
+
+        <!--Start Checkout Page-->
+        <section class="checkout-page rtl">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="billing_details">
+                            <div class="billing_title">
+                                <p>آیا میخواهید به سبد خرید برگردید؟<a href="{% url 'cart:cart-detail' %}"><span>اینجا کلیک کنید</span></a></p>
+                                <h2>جزئیات صورتحساب</h2>
+                            </div>
+                            <form class="billing_details_form" method="post" action="{% url 'cart:add-address' %}">
+                                {% csrf_token %}
+                                <div class="row bs-gutter-x-20">
+                                    <div class="col-xl-6">
+                                        <div class="billing_input_box">
+                                            <input type="text" name="first_name" value="" placeholder="نام"
+                                                required >
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="billing_input_box">
+                                            <input type="text" name="last_name" value="" placeholder="نام خانوادگی"
+                                                required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="billing_input_box">
+                                            <input type="text" name="detailed_address" value="" placeholder="آدرس دقیق">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <div class="billing_input_box">
+                                            <input type="text" name="province" value=""
+                                                placeholder="استان">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <div class="billing_input_box">
+                                            <input type="text" name="city" value="" placeholder="شهر"
+                                                required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row bs-gutter-x-20">
+                                    <div class="col-xl-6">
+                                        <div class="billing_input_box">
+                                            <input type="text" name="plaque" value="" placeholder="پلاک" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="billing_input_box">
+                                            <input name="postal_code" type="text" pattern="[0-9]*" placeholder="کد پستی">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="billing_input_box">
+                                            <input type="tel" name="recipient_phone"
+                                                required="" placeholder="تلفن گیرنده">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="billing_input_box">
+                                            <input type="text" name="note"
+                                                    placeholder="یادداشت سفارش(اختیاری)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right d-flex justify-content-end">
+                                <button type="submit" class="thm-btn">سفارش خود را ثبت کنید</button>
+                            </div><!-- /.text-right -->
+
+                                {% if messages %}
+                                    <ul class="messages">
+                                        {% for message in messages %}
+                                            <li class="{{ message.tags }}">{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                {% if form.errors %}
+                                    {% for error in form.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="your_order">
+                    <h2>سفارش شما</h2>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="order_table_box">
+                                <table class="order_table_detail">
+                                    <thead class="order_table_head">
+                                        <tr>
+                                            <th>محصول</th>
+                                            <th class="right">قیمت</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in cart %}
+                                        <tr>
+                                            <td class="pro__title">{{ item.product }} * {{ item.quantity }}</td>
+                                            <td class="pro__price">{{ item.product.new_price }} تومان</td>
+                                        </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <td class="pro__title">حمل و نقل</td>
+                                            <td class="pro__price">{{ cart.get_total_post }} تومان</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="pro__title">مجموع</td>
+                                            <td class="pro__price" style="font-weight: bold">{{ cart.get_final_price }} تومان</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="checkout__payment">
+                                <div class="checkout__payment__item checkout__payment__item--active">
+                                    <h3 class="checkout__payment__title">پرداخت با درگاه بانکی<img
+                                            src="{% static 'images/shop/paypal-1.jpg' %}" alt=""></h3>
+                                    <div class="checkout__payment__content">
+                                        با استفاده از درگاه بانکی مستقیم و به راحتی پرداخت را انجاد دهید.
+                                    </div><!-- /.checkout__payment__content -->
+                                </div><!-- /.checkout__payment__item -->
+                            </div><!-- /.checkout__payment -->
+
+
+                        </div><!-- /.col-lg-6 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Checkout Page-->
+
+{% endblock %}

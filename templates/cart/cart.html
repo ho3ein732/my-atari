@@ -1,0 +1,207 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block title %}سبـد خریـد{% endblock %}
+
+{% block content %}
+        <!--Page Header Start-->
+    <section class="page-header rtl">
+        <div class="page-header-bg" style="background-image: url({% static 'images/backgrounds/page-header-bg.jpg' %})">
+        </div>
+        <div class="page-header__ripped-paper"
+            style="background-image: url({% static 'images/shapes/page-header-ripped-paper.png' %});"></div>
+        <div class="container">
+            <div class="page-header__inner">
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li><a href="{% url 'store:index' %}">خانه</a></li>
+                    <li><span>/</span></li>
+                    <li>فروشگاه</li>
+                </ul>
+                <h2>سبد خرید</h2>
+            </div>
+        </div>
+    </section>
+    <!--Page Header End-->
+
+    <!--Start Cart Page-->
+    {% if cart|length <= 0 %}
+        <h3 style="text-align: center;margin: 0 auto">سبد خرید خالی است <a href="{% url 'store:index' %}" style="color: #6610f2">به فروشگاه بروید</a></h3>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        {% else %}
+    <section class="cart-page rtl reload-cart">
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table cart-table">
+                    <thead>
+                        <tr>
+                            <th>مورد</th>
+                            <th>قیمت</th>
+                            <th>مقدار</th>
+                            <th>حذف کنید</th>
+                        </tr>
+                    </thead>
+                    <tbody class="reload-cart">
+                    {% for item in cart %}
+                        <tr>
+                            <td>
+                                <div class="product-box">
+                                    <div class="img-box">
+                                        <img src="{{ item.product.images.first.file.url }}" alt="">
+                                    </div>
+                                    <h3><a href="{{ item.product.get_absolute_url }}">{{ item.product.name }}</a></h3>
+                                </div>
+                            </td>
+                            <td>{{ item.product.new_price }} تومان</td>
+                            <td>
+                                <div class="quantity-box">
+                                    <button type="button" class="sub quantity-minus" data-product-id="{{ item.product.id }}"><i class="fa fa-minus"></i></button>
+                                    <input type="number" id="product-{{ item.product.id }}" value="{{ item.quantity }}" disabled/>
+                                    <button type="button" class="add quantity-plus" data-product-id="{{ item.product.id }}"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="cross-icon">
+                                    <i class="icon-close remove-icon product-remove" data-product-id="{{ item.product.id }}"></i>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <!--TODO  copen-->
+                <div class="col-xl-8 col-lg-7">
+                    <form action="{% url 'store:discount_code' %}" class="default-form cart-cupon__form my-discount-form" method="post">
+                        {% csrf_token %}
+                        <input type="text" placeholder="کد کوپن را وارد کنید" class="cart-cupon__input" name="copen_code">
+                        <button class="thm-btn btn-discount" type="submit">
+                            <span>اعمال کوپن</span>
+                        </button>
+                    </form>
+                </div>
+                <div class="col-xl-4 col-lg-5">
+                    <ul class="cart-total list-unstyled">
+                        <li>
+                            <span>حمل و نقل</span>
+                            <span>{{ cart.get_total_post }} تومان</span>
+                        </li>
+                        <li>
+                            <span>مجموع</span>
+                            <span class="cart-total-amount summary-subtotal-price final-price " data-final-price="{{ cart.get_final_price }}">{{ cart.get_final_price }} تومان</span>
+                        </li>
+                    </ul>
+                    <div class="cart-page__buttons">
+                        <div class="cart-page__buttons-2">
+                            <a href="{% url 'cart:add-address' %}" class="thm-btn btn-checkout">تسویه حساب</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    {% include 'partials/subscribe.html' %}
+    <!--End Cart Page-->
+
+               <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+            $(document).ready(function() {
+                function updateCartUI(data) {
+                    $('.summary-subtotal-price, .summary-total-price').text(data.total_price + " تومان");
+
+                    if ({{ cart|length }} <= 0) {
+                        $('.reload-cart').html('<tr><td colspan="6" class="text-center">سبد خرید خالی است.</td></tr>');
+                        $('.btn-checkout').addClass('disabled');
+                    }
+                }
+
+                $('.product-remove').click(function(e) {
+                    e.preventDefault();
+                    var button = $(this);
+                    var productId = button.data('product-id');
+
+                    $.ajax({
+                        url: '{% url "cart:remove-item" %}',
+                        method: 'POST',
+                        data: {
+                            'item_id': productId,
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        success: function(data) {
+                            if (data.success) {
+                                button.closest('tr').remove();
+                                updateCartUI(data);
+                            } else {
+                                alert(data.message || 'خطا در حذف محصول.');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.log('AJAX Error:', error);
+                            alert('مشکلی در ارتباط با سرور وجود دارد.');
+                        }
+                    });
+                });
+
+                $('.quantity-minus, .quantity-plus').click(function(e) {
+                    e.preventDefault();
+                    var button = $(this);
+                    var productId = button.closest('.quantity-box').find('.quantity-plus, .quantity-minus').data('product-id');
+                    var action = button.hasClass('quantity-plus') ? 'add' : 'decrease';
+
+                    $.ajax({
+                        url: '{% url "cart:update-quantity" %}',
+                        type: 'POST',
+                        data: {
+                            'csrfmiddlewaretoken': '{{ csrf_token }}',
+                            'action': action,
+                            'item_id': productId
+                        },
+                        success: function(data) {
+                            var quantityInput = button.closest('.quantity-box').find('input');
+                            quantityInput.val(data.quantity);
+                            updateCartUI(data);
+                            if (data.quantity === 0) button.closest('tr').remove();
+                        },
+                        error: function(xhr, status, error) {
+                            console.log('AJAX Error:', error);
+                            alert('مشکلی در ارتباط با سرور وجود دارد.');
+                        }
+                    });
+                });
+                $('.my-discount-form').submit(function(e){
+                    e.preventDefault();
+                    var MyForm = $(this)
+                    var MyData = MyForm.serialize()
+                    var Order_total = $('.final-price').data('final-price')
+
+                    MyData += '&order_total='+Order_total;
+
+                    $.ajax({
+                        url: '{% url "store:discount_code" %}',
+                        data: MyData,
+                        method: 'POST',
+                        success: function (data) {
+                            console.log(data)
+                            if (data.success) {
+                                var TotalPrice = data.total32
+                                var apply = 'کد با موفقیت اعمال شد'
+                                $('.final-price').text(TotalPrice);
+                                $('.btn-discount').text(apply)
+                            }else{
+                                var accepted = 'کد تخفیف منقضی شده است'
+                                $('.btn-discount').text(accepted)
+                            }
+                            },
+                        error: function (error) {
+                            console.log(error)
+                        },
+                    });
+                });
+            });
+    </script>
+{% endblock %}

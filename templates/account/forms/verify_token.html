@@ -1,0 +1,40 @@
+<!-- register.html -->
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- register.html -->
+    <section class="account rtl">
+        <div class="container">
+            <div class="account__main-tab-box tabs-box">
+                <ul class="tab-buttons clearfix list-unstyled">
+                    <li data-tab="#register" class="tab-btn active-btn"><span>تایید کد</span></li>
+                </ul>
+                <div class="tabs-content">
+                    <!--tab-->
+                    <div class="tab active-tab" id="register">
+                        <div class="account__main-tab-inner">
+                            <form class="account__form">
+                                <div class="account__form-input-box">
+                                    {{ form.token }}
+                                </div>
+                                <div class="account__form-btn-box">
+                                    <button type="submit" class="thm-btn account__form-btn">تایید</button>
+                                </div>
+                                {% if messages %}
+                                        <ul class="messages">
+                                            {% for message in messages %}
+                                                <li class="{{ message.tags }}">{{ message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                    <!--tab-->
+                </div>
+            </div>
+        </div>
+    </section>
+        {% include 'partials/subscribe.html' %}
+
+{% endblock %}

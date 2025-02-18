@@ -1,0 +1,47 @@
+<!--Hot Products Start-->
+{% load custom_filters %}
+<section class="hot-products rtl">
+    <div class="container">
+        {% for slider in middle_slider_products %}
+        <div class="section-title text-center">
+            <span class="section-title__tagline">{{ slider.title }}</span>
+            <h2 class="section-title__title">{{ slider.short_description }}</h2>
+        </div>
+        <ul class="hot-products__inner list-unstyled">
+            {% for product in slider.product.all %}
+            <li class="wow fadeInUp" data-wow-delay="{{ forloop.counter|multiply:100 }}ms">
+                <div class="hot-products__single">
+                    <div class="hot-products__single-inner">
+                        <div class="hot-products__img-box">
+                            <div class="hot-products__img">
+                                <img src="{{ product.images.first.file.url }}" alt="">
+                            </div>
+                        </div>
+                        <div class="hot-products__content">
+                            <h3 class="hot-products__title">
+                                <a href="{% url 'store:product_detail' product.id product.slug %}">{{ product.name }}</a>
+                            </h3>
+                            <p class="hot-products__price">{{ product.new_price }} تومان</p>
+                            <div class="hot-products__btn-box">
+                                {% if product.inventory < 1 %}
+                                    <p style="color: #6a1a21">ناموجود</p>
+                                {% else %}
+                                    <a href="#" class="hot-products__btn thm-btn btn-cart" data-product-id="{{ product.id }}">به سبد خرید اضافه کنید</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="hot-products__icon-boxes">
+                            <a class="btn-wishlist" data-product-id="{{ product.id }}"><i class="far fa-heart"></i></a>
+                            <a href="{{ product.get_absolute_url }}"><i class="fas fa-eye"></i></a>
+                            {% include 'partials/notif.html' %}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </div>
+</section>
+
+<!--Hot Products End-->

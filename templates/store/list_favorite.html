@@ -1,0 +1,72 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block title %}لیست علاقه مندی ها{% endblock %}
+
+
+{% block content %}
+
+        <!--Page Header Start-->
+    <section class="page-header rtl">
+        <div class="page-header-bg" style="background-image: url({% static 'images/backgrounds/page-header-bg.jpg' %})">
+        </div>
+        <div class="page-header__ripped-paper"
+            style="background-image: url({% static 'images/shapes/page-header-ripped-paper.png' %});"></div>
+        <div class="container">
+            <div class="page-header__inner">
+                <ul class="thm-breadcrumb list-unstyled">
+                    <li><a href="{% url 'store:index' %}">خانه</a></li>
+                    <li><span>/</span></li>
+                    <li>فروشگاه</li>
+                </ul>
+                <h2>لیست علاقه مندی ها</h2>
+            </div>
+        </div>
+    </section>
+    <!--Page Header End-->
+
+    <!--Start Cart Page-->
+    <section class="wishlist-page rtl">
+        <div class="container">
+            <div class="table-responsive-box">
+                <table class="wishlist-table">
+                    <tbody>
+                    {% for item in products %}
+                        <tr>
+                            <td>
+                                <div class="product-box">
+                                    <div class="img-box">
+                                        <img src="{{ item.product.images.first.file.url }}" alt="">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="product-name-select-box">
+                                    <div class="product-name">
+                                        <h4>{{ item.product.name }}</h4>
+                                        <p>{{ item.product.new_price }} تومان</p>
+                                    </div>
+                                    <div class="product-select">
+                                        <a href="{{ item.product.get_absolute_url }}" class="thm-btn product-select-btn">مشاهده</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="cross-icon">
+                                    <i class="icon-close remove-icon" id="remove-will" data-product-id="{{ item.product.id }}"></i>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+
+                        <span style="background-color:#0a58ca; border-radius: 5px;color: #191c1f; padding: 2px">  چیزی در علاقه مندی ها وجود ندارد!<br><a href="{% url 'store:index' %}" style="color: red">به فروشگاه بروید  </a></span>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    {% include 'partials/subscribe.html' %}
+    <!--End Cart Page-->
+
+{% endblock %}
