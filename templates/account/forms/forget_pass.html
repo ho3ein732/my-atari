@@ -2,40 +2,44 @@
 {% extends 'parent/base.html' %}
 {% load static %}
 {% block content %}
-    <!-- register.html -->
+
+        <!-- login.html -->
     <section class="account rtl">
         <div class="container">
             <div class="account__main-tab-box tabs-box">
                 <ul class="tab-buttons clearfix list-unstyled">
-                    <li data-tab="#register" class="tab-btn active-btn"><span>فراموشی رمز عبور</span></li>
+                    <li data-tab="#login" class="tab-btn active-btn"><span>فراموشی رمز عبور</span></li>
                 </ul>
                 <div class="tabs-content">
                     <!--tab-->
-                    <div class="tab active-tab" id="register">
+                    <div class="tab active-tab" id="login">
                         <div class="account__main-tab-inner">
-                            <form class="account__form">
-                                <div class="account__form-input-box">
-                                    <input type="email" placeholder="ایمیل" name="email">
-                                </div>
+                            <form class="account__form" method="post" action="{% url 'account:forget-master-master' %}">
+                                {% csrf_token %}
+                                    <div class="account__form-input-box">
+                                        <input type="email" name="email" placeholder="ایمیل">
+                                    </div>
                                 <div class="account__form-btn-box">
                                     <button type="submit" class="thm-btn account__form-btn">ارسال کد</button>
                                 </div>
+                                <div class="account__form-forgot-password">
+                                    <a href="{% url 'account:login' %}">حساب کاربری دارید وارد شوید؟</a>
+                                </div>
+                                <div class="account__form-forgot-password">
+                                    <a href="{% url 'account:register' %}">حساب کاربری ندارید؟ثبت نام کنید</a>
+                                </div>
                                 {% if messages %}
-                                        <ul class="messages">
-                                            {% for message in messages %}
-                                                <li class="{{ message.tags }}">{{ message }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                {% endif %}
-                                {% if form.errors %}
-                                    <ul class="error-messages">
-                                        {% for field, errors in form.errors.items %}
-                                            {% for error in errors %}
-                                                <li class="error">{{ error }}</li>
-                                            {% endfor %}
+                                    <ul class="messages">
+                                        {% for message in messages %}
+                                            <li class="{{ message.tags }}">{{ message }}</li>
                                         {% endfor %}
                                     </ul>
                                 {% endif %}
+                            {% if form.errors %}
+                                <ul>
+                                {% for error in form.errors %}<li>{{ error }}</li>{% endfor %}
+                                </ul>
+                            {% endif %}
                             </form>
                         </div>
                     </div>

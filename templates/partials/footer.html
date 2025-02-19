@@ -71,11 +71,11 @@
                                 </div>
                                 <div class="site-footer__bottom-right">
                                     <ul class="list-unstyled site-footer__bottom-menu">
-                                        <li><a href="about.html">شرایط و ضوابط</a></li>
+                                        <li><a href="{% url 'store:about_us' %}">شرایط و ضوابط</a></li>
                                         <li><span>/</span></li>
-                                        <li><a href="about.html">سیاست حفظ حریم خصوصی</a></li>
+                                        <li><a href="{% url 'store:about_us' %}">سیاست حفظ حریم خصوصی</a></li>
                                         <li><span>/</span></li>
-                                        <li><a href="about.html">سیاست حفظ حریم خصوصی</a></li>
+                                        <li><a href="{% url 'store:about_us' %}">سیاست حفظ حریم خصوصی</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
             <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
 
             <div class="logo-box">
-                <a href="index-2.html" aria-label="logo image"><img src="assets/images/resources/logo-1.png" width="104"
+                <a href="{% url 'store:index' %}" aria-label="logo image"><img src="{% static 'images/resources/logo-1.png' %}" width="104"
                         alt="" /></a>
             </div>
             <!-- /.logo-box -->
@@ -130,9 +130,9 @@
         <div class="search-popup__overlay search-toggler"></div>
         <!-- /.search-popup__overlay -->
         <div class="search-popup__content">
-            <form action="#">
+            <form action="{% url 'store:search' %}" method="get">
                 <label for="search" class="sr-only">جستجو کنید</label><!-- /.sr-only -->
-                <input type="text" id="search" placeholder="جستجو کنید" />
+                <input type="text" id="search" name="query" placeholder="جستجو کنید" />
                 <button type="submit" aria-label="search submit" class="thm-btn">
                     <i class="icon-magnifying-glass"></i>
                 </button>

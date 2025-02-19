@@ -43,7 +43,9 @@
                         <p class="product-details__content-text1">{{ product.description }}</p>
                         <p class="product-details__content-text2">شناسه. {{ product.id }} <br>
                             {% if product.inventory < 1 %}
-                            	ناموجود{% else %}موجود
+                            	ناموجود
+                            {% else %}
+                                موجود
                             {% endif %}  در فروشگاه</p></p>
                     </div>
 
@@ -51,14 +53,15 @@
 
                     <div class="product-details__buttons">
                         <div class="product-details__buttons-1">
-                            <a href="wishlist.html" class="thm-btn">به لیست علاقه مندی ها اضافه کنید</a>
+                            <a href="#" class="thm-btn btn-wishlist" data-product-id="{{ product.id }}">به لیست علاقه مندی ها اضافه کنید</a>
+                            {% include 'partials/notif.html' %}
                         </div>
 
                         <div class="product-details__buttons-2">
                             {% if product.inventory < 1 %}
                                 <p style="color: #6a1a21">ناموجود</p>
                             {% else %}
-                            <a href="cart.html" class="thm-btn">به سبد خرید اضافه کنید</a>
+                            <a href="#" class="thm-btn btn-cart" data-product-id="{{ product.id }}">به سبد خرید اضافه کنید</a>
                             {% endif %}
                         </div>
                     </div>

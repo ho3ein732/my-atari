@@ -70,18 +70,6 @@
                                     <div class="product__showing-text-box">
                                         <p class="product__showing-text">{{ products.count }}</p>
                                     </div>
-                                    <div class="product__menu-showing-sort">
-                                        <div class="product__showing-sort ltr">
-                                            <div class="select-box">
-                                                <select class="wide">
-                                                    <option data-display="مرتب سازی بر اساس محبوب">مرتب سازی بر اساس محبوبیت</option>
-                                                    <option value="1">مرتب سازی بر اساس محبوبیت</option>
-                                                    <option value="2">مرتب سازی بر اساس قیمت</option>
-                                                    <option value="3">مرتب سازی بر اساس رتبه بندی</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -95,8 +83,9 @@
                                             <img src="{{ item.images.first.file.url }}" alt="">
                                         </div>
                                         <div class="product-list__icon-boxes">
-                                            <a href="#"><i class="far fa-heart"></i></a>
+                                            <a class="btn-wishlist" data-product-id="{{ item.id }}"><i class="far fa-heart"></i></a>
                                             <a href="{{ item.get_absolute_url }}"><i class="fas fa-eye"></i></a>
+                                            {% include 'partials/notif.html' %}
                                         </div>
                                     </div>
                                     <div class="product-list__content">
@@ -106,7 +95,11 @@
                                         <p class="product-list__price">{{ item.new_price }} تومان</p>
                                         <p class="product-list__text">{{ item.description }}</p>
                                         <div class="product-list__btn-box">
-                                            <a href="cart.html" class="thm-btn product-list__btn">به سبد خرید اضافه کنید</a>
+                                            {% if item.inventory < 1 %}
+                                                <p style="color: #6a1a21">ناموجود</p>
+                                            {% else %}
+                                            <a href="#" class="thm-btn product-list__btn btn-cart" data-product-id="{{ item.id }}">به سبد خرید اضافه کنید</a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

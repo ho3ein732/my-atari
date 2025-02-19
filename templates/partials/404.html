@@ -1,0 +1,52 @@
+{% load static %}
+<!--Page Header Start-->
+        <section class="page-header rtl">
+            <div class="page-header-bg" style="background-image: url({% static 'images/backgrounds/page-header-bg.jpg' %})">
+            </div>
+            <div class="page-header__ripped-paper"
+                style="background-image: url({% static 'images/shapes/page-header-ripped-paper.png' %});"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <ul class="thm-breadcrumb list-unstyled">
+                        <li><a href="{% url 'store:index' %}">خانه</a></li>
+                        <li><span>/</span></li>
+                        <li>صفحات</li>
+                    </ul>
+                    <h2>ارور 404</h2>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End-->
+
+
+        <!--Error Page Start-->
+        <section class="error-page rtl">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="error-page__inner">
+                            <div class="error-page__title-box">
+                                <h2 class="error-page__title">4<span>0</span>4
+                                </h2>
+                                <div class="error-page__title-img-1">
+                                    <img src="{% static 'images/resources/error-page-img-1.png' %}" alt="">
+                                </div>
+                                <div class="error-page__title-img-2">
+                                    <img src="{% static 'images/resources/error-page-img-2.png' %}" alt="">
+                                </div>
+                            </div>
+                            <h3 class="error-page__tagline">صفحه پیدا نشد!</h3>
+                            <p class="error-page__text">متاسفم که نمی توانیم آن صفحه را پیدا کنیم! صفحه ای که به دنبال آن هستید هرگز وجود نداشته است.</p>
+                            <form class="error-page__form" method="get" action="{% url 'store:search' %}">
+                                <div class="error-page__form-input">
+                                    <input type="search" placeholder="جستجو کنید" name="query">
+                                    <button type="submit"><i class="icon-magnifying-glass"></i></button>
+                                </div>
+                            </form>
+                            <a href="{% url 'store:index' %}" class="thm-btn error-page__btn">بازگشت به خانه</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Error Page End-->
