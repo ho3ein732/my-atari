@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 from .cart import Cart
@@ -206,3 +206,18 @@ def verify(request):
             return render(request, 'cart/order.html', {'success': False, 'message': "خطا در تایید پرداخت"})
     else:
         return render(request, 'cart/order.html', {'success': False, 'message': "پرداخت توسط کاربر لغو شد."})
+
+@login_required
+def my_orders(request):
+    orders = Order.objects.filter(buyer=request.user)
+    return render(request, 'cart/my_orders.html', {'orders': orders})
+
+
+@login_required
+def order_detail(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+
+    if order.buyer != request.user:
+        raise Http404("شما به این سفارش دسترسی ندارید.")
+
+    return render(request, 'cart/order_detail.html', {'order': order})

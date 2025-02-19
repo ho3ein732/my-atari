@@ -1,0 +1,57 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block title %}جزئیات سفارش{% endblock %}
+
+{% block content %}
+
+<!--Page Header Start-->
+<section class="page-header rtl">
+    <div class="page-header-bg" style="background-image: url({% static 'images/backgrounds/page-header-bg.jpg' %})">
+    </div>
+    <div class="page-header__ripped-paper"
+        style="background-image: url({% static 'images/shapes/page-header-ripped-paper.png' %});"></div>
+    <div class="container">
+        <div class="page-header__inner">
+            <ul class="thm-breadcrumb list-unstyled">
+                <li><a href="{% url 'store:index' %}">خانه</a></li>
+                <li><span>/</span></li>
+                <li><a href="{% url 'cart:my_orders' %}">سفارش‌ها</a></li>
+                <li><span>/</span></li>
+                <li>جزئیات سفارش</li>
+            </ul>
+            <h2>جزئیات سفارش شماره {{ order.id }}</h2>
+        </div>
+    </div>
+</section>
+<!--Page Header End-->
+
+<!--Order Details Start-->
+<section class="order-details-page rtl" style="padding: 40px 0;">
+    <div class="container">
+        <div class="order-summary" style="background: #f9f9f9; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+            <p><strong>شماره سفارش:</strong> {{ order.id }}</p>
+            <p><strong>تاریخ:</strong> {{ order.created }}</p>
+            <p><strong>وضعیت:</strong> {{ order.status }}</p>
+            <p><strong>مبلغ کل:</strong> {{ order.get_final_cost }} تومان</p>
+        </div>
+        <h3 class="text-right">محصولات سفارش داده شده</h3>
+        <ul class="order-items-list" style="list-style: none; padding: 0;">
+            {% for item in order.items.all %}
+                <li style="background: #ffffff; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0px 0px 5px rgba(0,0,0,0.1);">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><strong>{{ item.product.name }}</strong></span>
+                        <span><strong>تعداد:</strong> {{ item.quantity }}</span>
+                        <span><strong>قیمت واحد:</strong> {{ item.price }} تومان</span>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'cart:my_orders' %}" class="btn btn-dark btn-rounded">بازگشت به لیست سفارش‌ها</a>
+    </div>
+</section>
+    <br>
+    <br>
+<!--Order Details End-->
+    {% include 'partials/subscribe.html' %}
+
+{% endblock %}

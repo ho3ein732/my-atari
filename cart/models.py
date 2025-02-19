@@ -20,6 +20,10 @@ class Address(models.Model):
     def __str__(self):
         return f'{self.user.email} -> {self.detailed_address}'
 
+    class Meta:
+        verbose_name = 'ادرس'
+        verbose_name_plural = 'ادرس ها'
+
 
 # Orders
 
@@ -43,6 +47,9 @@ class Order(models.Model):
         indexes = [
             models.Index(fields=['-updated'])
         ]
+
+        verbose_name = 'سفارش'
+        verbose_name_plural = 'سفارش ها'
 
     def __str__(self):
         return f'Order {self.id}'
@@ -76,3 +83,7 @@ class OrderItem(models.Model):
 
     def get_weight(self):
         return self.quantity * self.weight
+
+    class Meta:
+        verbose_name = 'ایتم سفارش'
+        verbose_name_plural = 'ایتم های سفارش'

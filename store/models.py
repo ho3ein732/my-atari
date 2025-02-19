@@ -198,8 +198,8 @@ class Review(models.Model):
         ordering = ['-created_at']
         unique_together = ('user', 'product')
 
-        verbose_name = 'نظر'
-        verbose_name_plural = 'نظرات'
+        verbose_name = 'کاربر'
+        verbose_name_plural = 'کاربران'
 
 
 class ContactUs(models.Model):
@@ -212,8 +212,13 @@ class ContactUs(models.Model):
         return f'{self.user} for {self.name}'
 
 
+
 class Emails(models.Model):
     email = models.EmailField()
+
+    class Meta:
+        verbose_name = 'ایمیل'
+        verbose_name_plural = 'ایمیل ها'
 
 
 class Copen(models.Model):
@@ -233,6 +238,10 @@ class Copen(models.Model):
             return False
         return True
 
+    class Meta:
+        verbose_name = 'کوپن'
+        verbose_name_plural = 'کوپن ها'
+
 
 class UserCopenUsage(models.Model):
     user = models.ForeignKey(NightUser, on_delete=models.CASCADE)
@@ -241,13 +250,15 @@ class UserCopenUsage(models.Model):
 
     objects = jmodels.jManager()
 
+    class Meta:
+        verbose_name = 'کاربر استفاده کرده از کوپن'
+        verbose_name_plural = 'کاربران استفاده کرده از کوپن'
+
 
 
 class Banner(models.Model):
     POSITION_CHOICES = [
         ('top', 'بالا'),
-        ('middle', 'وسط'),
-        ('button', 'پایین')
     ]
 
     title = models.CharField(max_length=55, verbose_name='عنوان')
@@ -293,7 +304,6 @@ class SliderProduct(models.Model):
     LOCATIONS_CHOICES = (
         ('top', 'بالا'),
         ('middle', 'وسط'),
-        ('button', 'پایین')
     )
     title = models.CharField(max_length=25)
     short_description = models.CharField(max_length=100)
@@ -303,3 +313,7 @@ class SliderProduct(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = 'اسلایدر محصول'
+        verbose_name_plural = 'اسلایدر های محصولات'

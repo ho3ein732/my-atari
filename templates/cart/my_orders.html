@@ -1,0 +1,52 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block title %}لیست سفارش‌ها{% endblock %}
+
+{% block content %}
+
+<!--Page Header Start-->
+<section class="page-header rtl">
+    <div class="page-header-bg" style="background-image: url({% static 'images/backgrounds/page-header-bg.jpg' %})">
+    </div>
+    <div class="page-header__ripped-paper"
+        style="background-image: url({% static 'images/shapes/page-header-ripped-paper.png' %});"></div>
+    <div class="container">
+        <div class="page-header__inner">
+            <ul class="thm-breadcrumb list-unstyled">
+                <li><a href="{% url 'store:index' %}">خانه</a></li>
+                <li><span>/</span></li>
+                <li>سفارش‌ها</li>
+            </ul>
+            <h2>لیست سفارش‌ها</h2>
+        </div>
+    </div>
+</section>
+<!--Page Header End-->
+
+<!--Start Orders Page-->
+<section class="orders-page rtl" style="padding: 40px 0;">
+    <div class="container">
+        <ul class="orders-list" style="list-style: none; padding: 0;">
+            {% for order in orders %}
+                <li style="background: #f9f9f9; padding: 20px; margin-bottom: 15px; border-radius: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span><strong>شماره سفارش:</strong> {{ order.id }}</span>
+                        <span><strong>تاریخ:</strong> {{ order.created }}</span>
+                        <span><strong>مبلغ:</strong> {{ order.get_final_cost }} تومان</span>
+                        <span><strong>وضعیت:</strong> {{ order.status }}</span>
+                        <a href="{% url 'cart:order_detail' order.id %}" class="thm-btn order-detail-btn">مشاهده</a>
+                    </div>
+                </li>
+            {% empty %}
+                <li style="text-align: center; background-color:#0a58ca; border-radius: 10px; color: #191c1f; padding: 20px;">
+                    هنوز سفارشی ثبت نشده است!<br>
+                    <a href="{% url 'store:index' %}" style="color: red">به فروشگاه بروید</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% include 'partials/subscribe.html' %}
+<!--End Orders Page-->
+
+{% endblock %}
